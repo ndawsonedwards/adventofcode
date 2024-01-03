@@ -1,0 +1,36 @@
+package adventofcode.scraper;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.stream.Stream;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
+public class InputScraper {
+
+        public static Stream<String> getInput(String year, String day) throws IOException {
+
+        String session = Dotenv
+                .configure()
+                .ignoreIfMissing()
+                .load()
+                .get("AOC_SESSION");
+
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+
+        Request request = new Request.Builder()
+                .url(String.format("https://adventofcode.com/%s/day/%s/input", year, day))
+                .addHeader("Cookie", session)
+                .build();
+
+        Response response = client.newCall(request).execute();
+
+        return Arrays.stream(Objects.requireNonNull(response.body()).string().split("\n"));
+    }
+
+}
