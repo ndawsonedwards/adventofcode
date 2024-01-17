@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import adventofcode.scraper.InputScraper;
 import adventofcode.solutions.day1.Day1Part1;
+import adventofcode.solutions.day1.Day1Part2;
 
 public class App {
 
@@ -15,8 +16,7 @@ public class App {
             Integer value = new Day1Part1().solve(input.stream());
             System.out.println("Answer for Day 1 part 1 is: " + value);
 
-            Day1Part1 Day1Part2Solver = new Day1Part1();
-            value = Day1Part2Solver.solve(input.stream());
+            value = new Day1Part2().solve(input.stream());
             System.out.println("Answer for Day 1 part 2 is: " + value);
 
         } catch (IOException e) {
