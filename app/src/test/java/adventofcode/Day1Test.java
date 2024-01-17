@@ -5,30 +5,19 @@ package adventofcode;
 
 import org.junit.jupiter.api.Test;
 
-import com.google.common.collect.Lists;
-
 import adventofcode.scraper.InputScraper;
 import adventofcode.solutions.day1.Day1Part1;
+import adventofcode.solutions.day1.Day1Part2;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-class AppTest {
-    @Test 
-    void inputFileIsValid() {
-
-        final String knownLine = "8eight1";
-        try (Stream<String> input = InputScraper.getInput("2023", "1")) {
-            String content = input.collect(Collectors.joining("\n"));
-            assertTrue(content.contains(knownLine));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }   
-    }
+class Day1Test {
 
 
     private String replaceNonInteger(String input) {
@@ -37,6 +26,19 @@ class AppTest {
 
     private String getFirstAndLastDigit(String input) {
         return input.charAt(0) + "" + input.charAt(input.length() - 1);
+    }
+
+    @Test 
+    void inputFileIsValid() {
+
+        final String knownLine = "8eight1";
+        try {
+            List<String> input = InputScraper.getInput("2023", "1");
+            assertTrue(input.stream().anyMatch(s -> s.equals(knownLine)));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }   
     }
 
     @Test
@@ -80,24 +82,56 @@ class AppTest {
 
 
     @Test
-    void summationIsValid() {
+    void testDay1Part1Example() {
 
-        final String knownString = "1abc2\r\n" + //
-                "pqr3stu8vwx\r\n" + //
-                "a1b2c3d4e5f\r\n" + //
-                "treb7uchet";
+        Stream<String> knownStream = Stream.of("1abc2","pqr3stu8vwx","a1b2c3d4e5f","treb7uchet");
 
-        Stream<String> knownStream = knownString.chars().mapToObj(String::valueOf);
-        final Integer knownAnswer = 77;
+        final Integer knownAnswer = 142;
+        Day1Part1 solution = new Day1Part1();
+        assertEquals(knownAnswer, solution.solve(knownStream));
 
-        try (Stream<String> input = InputScraper.getInput("2023", "1")) {
-            Day1Part1 solution = new Day1Part1();
-            assertEquals(knownAnswer, solution.solve(knownStream));
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }   
     }
+    @Test
+    void testDay1Part2Sample() {
+
+        Stream<String> knownStream = Stream.of("two1nine",
+                    "eightwothree",
+                    "abcone2threexyz",
+                    "xtwone3four",
+                    "4nineeightseven2",
+                    "zoneight234",
+                    "7pqrstsixteen");
+
+        final Integer knownAnswer = 281;
+
+        Day1Part2 solution = new Day1Part2();
+        assertEquals(knownAnswer, solution.solve(knownStream));
+
+    }
+
+    @Test 
+    void testDay1Part1() {
+        try {
+            List<String> input = InputScraper.getInput("2023", "1");
+            Integer value = new Day1Part1().solve(input.stream());
+            System.out.println("Answer for Day 1 part 1 is: " + value);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test 
+    void testDay1Part2() {
+        try {
+            List<String> input = InputScraper.getInput("2023", "1");
+            Integer value = new Day1Part2().solve(input.stream());
+            System.out.println("Answer for Day 1 part 2 is: " + value);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
 }

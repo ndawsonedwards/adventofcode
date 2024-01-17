@@ -9,10 +9,10 @@ public class Day1Part1 implements ISolver<Integer>{
     @Override
     public Integer solve(Stream<String> input) {
         return input.map(this::replaceNonInteger)
-                .filter(s -> !s.isEmpty())
-                .map(this::getFirstAndLastDigit)
-                .mapToInt(Integer::parseInt)
-                .sum();
+            .filter(s -> !s.isEmpty())
+            .map(this::getFirstAndLastDigit)
+            .mapToInt(Integer::parseInt)
+            .sum();
     }
 
     private String replaceNonInteger(String input) {
@@ -20,6 +20,6 @@ public class Day1Part1 implements ISolver<Integer>{
     }
 
     private String getFirstAndLastDigit(String input) {
-        return input.charAt(0) + input.charAt(input.length() - 1) + "";
+        return input.charAt(0) + "" + input.charAt(input.length() - 1);
     }
 }
