@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
-import adventofcode.ISolver;
+import adventofcode.interfaces.ISolver;
 
 public class Day1Part2 implements ISolver<Integer> {
 

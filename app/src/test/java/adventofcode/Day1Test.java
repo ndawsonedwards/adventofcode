@@ -36,7 +36,6 @@ class Day1Test {
             List<String> input = InputScraper.getInput("2023", "1");
             assertTrue(input.stream().anyMatch(s -> s.equals(knownLine)));
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }   
     }
@@ -89,8 +88,8 @@ class Day1Test {
         final Integer knownAnswer = 142;
         Day1Part1 solution = new Day1Part1();
         assertEquals(knownAnswer, solution.solve(knownStream));
-
     }
+    
     @Test
     void testDay1Part2Sample() {
 

@@ -1,4 +1,4 @@
-package adventofcode;
+package adventofcode.interfaces;
 
 import java.util.stream.Stream;
 

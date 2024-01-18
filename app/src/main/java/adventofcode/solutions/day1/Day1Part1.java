@@ -2,7 +2,7 @@ package adventofcode.solutions.day1;
 
 import java.util.stream.Stream;
 
-import adventofcode.ISolver;
+import adventofcode.interfaces.ISolver;
 
 public class Day1Part1 implements ISolver<Integer>{
 
