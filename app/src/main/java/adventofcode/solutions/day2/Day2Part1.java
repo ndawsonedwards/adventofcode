@@ -7,13 +7,14 @@ import adventofcode.interfaces.ISolver;
 
 public class Day2Part1 implements ISolver<Integer>{
 
-    /**
-     * Regex that captures a ## Blue, where ## is larger than the max value for the color
-     */
+    
+    //Regex that captures a "## Color" pattern, where ## is larger than the max value for the color
     public final static Pattern BLUE_PATTERN = Pattern.compile("(1[5-9]|[2-9]\\d|\\d{3,})\\s+blue");
     public final static Pattern RED_PATTERN = Pattern.compile("(1[3-9]|[2-9]\\d|\\d{3,})\\s+red");
     public final static Pattern GREEN_PATTERN = Pattern.compile("(1[4-9]|[2-9]\\d|\\d{3,})\\s+green");
+
     public final static Pattern GAME_PATTERN = Pattern.compile("Game (\\d+):");
+
 
 
     @Override

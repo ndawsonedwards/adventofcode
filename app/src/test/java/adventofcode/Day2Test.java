@@ -1,6 +1,8 @@
 package adventofcode;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,7 +11,9 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import adventofcode.scraper.InputScraper;
+import adventofcode.solutions.day1.Day1Part2;
 import adventofcode.solutions.day2.Day2Part1;
+import adventofcode.solutions.day2.Day2Part2;
 
 public class Day2Test {
     
@@ -80,15 +84,27 @@ public class Day2Test {
 
     @Test
     void testProvidedSample() {
-        String KnownPattern = "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n" +
-                                "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n" +
-                                "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n" +
-                                "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n" +
-                                "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green";
+        String[] sample = {"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n",
+                                "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n",
+                                "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n",
+                                "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n",
+                                "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
+        };
 
-        Integer value = new Day2Part1().solve(Stream.of(KnownPattern));
-        assertEquals("8", value);
+        Integer value = new Day2Part1().solve(Stream.of(sample));
+        assertEquals(8, value);
     }
+
+    @Test
+    public void testGetMaxValue() {
+        String input = "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red";
+
+        assertEquals(6, Day2Part2.getMaxValue(input, "blue"));
+        assertEquals(20, Day2Part2.getMaxValue(input, "red"));
+        assertEquals(13, Day2Part2.getMaxValue(input, "green"));
+
+    }
+
 
     @Test 
     void testDay1Part1() {
@@ -100,6 +116,32 @@ public class Day2Test {
             e.printStackTrace();
         }
     }
+
+    @Test 
+    void testDay2Part2Sample() {
+
+        String[] sample = {"Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green\n",
+                "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue\n",
+                "Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red\n",
+                "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n",
+                "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
+        };
+
+        Integer value = new Day2Part2().solve(Stream.of(sample));
+        assertEquals(2286, value);
+    }
+
+    @Test 
+    void testDay2Part2() {
+        try {
+            List<String> input = InputScraper.getInput("2023", "2");
+            Integer value = new Day2Part2().solve(input.stream());
+            System.out.println("Answer for Day 2 part 2 is: " + value);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
