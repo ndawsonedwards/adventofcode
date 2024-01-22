@@ -1,7 +1,7 @@
 package adventofcode.interfaces;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 public interface ISolver<T> {
-    T solve(Stream<String> input);
+    T solve(List<String> input);
 }

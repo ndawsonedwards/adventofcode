@@ -5,9 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Stream;
-
 import org.junit.jupiter.api.Test;
 
 import adventofcode.scraper.InputScraper;
@@ -89,8 +88,9 @@ public class Day2Test {
                                 "Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red\n",
                                 "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
         };
-
-        Integer value = new Day2Part1().solve(Stream.of(sample));
+        List<String> input = Arrays.asList(sample);
+        
+        Integer value = new Day2Part1().solve(input);
         assertEquals(8, value);
     }
 
@@ -109,7 +109,7 @@ public class Day2Test {
     void testDay1Part1() {
         try {
             List<String> input = InputScraper.getInput("2023", "2");
-            Integer value = new Day2Part1().solve(input.stream());
+            Integer value = new Day2Part1().solve(input);
             System.out.println("Answer for Day 2 part 1 is: " + value);
         } catch (IOException e) {
             e.printStackTrace();
@@ -126,7 +126,9 @@ public class Day2Test {
                 "Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"
         };
 
-        Integer value = new Day2Part2().solve(Stream.of(sample));
+        List<String> input = Arrays.asList(sample);
+
+        Integer value = new Day2Part2().solve(input);
         assertEquals(2286, value);
     }
 
@@ -134,7 +136,7 @@ public class Day2Test {
     void testDay2Part2() {
         try {
             List<String> input = InputScraper.getInput("2023", "2");
-            Integer value = new Day2Part2().solve(input.stream());
+            Integer value = new Day2Part2().solve(input);
             System.out.println("Answer for Day 2 part 2 is: " + value);
         } catch (IOException e) {
             e.printStackTrace();

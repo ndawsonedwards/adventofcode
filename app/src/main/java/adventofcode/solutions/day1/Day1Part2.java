@@ -1,9 +1,8 @@
 package adventofcode.solutions.day1;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
-
 import adventofcode.interfaces.ISolver;
 
 public class Day1Part2 implements ISolver<Integer> {
@@ -13,7 +12,7 @@ public class Day1Part2 implements ISolver<Integer> {
 
 
     @Override
-    public Integer solve(Stream<String> input) {
+    public Integer solve(List<String> input) {
 
         replacementMap.put("one", "o1e");
         replacementMap.put("two", "t2o");
@@ -27,7 +26,7 @@ public class Day1Part2 implements ISolver<Integer> {
 
 
 
-        return input.map(this::replaceNumericWords)
+        return input.stream().map(this::replaceNumericWords)
             .filter(s -> !s.isEmpty())
             .map(this::replaceNonInteger)
             .map(this::getFirstAndLastDigit)

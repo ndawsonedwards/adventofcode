@@ -14,10 +14,10 @@ public class App {
         try  {
             List<String> input = InputScraper.getInput("2023", "1");
 
-            Integer value = new Day1Part1().solve(input.stream());
+            Integer value = new Day1Part1().solve(input);
             System.out.println("Answer for Day 1 part 1 is: " + value);
 
-            value = new Day1Part2().solve(input.stream());
+            value = new Day1Part2().solve(input);
             System.out.println("Answer for Day 1 part 2 is: " + value);
 
         } catch (IOException e) {

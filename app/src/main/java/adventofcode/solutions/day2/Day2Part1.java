@@ -1,8 +1,7 @@
 package adventofcode.solutions.day2;
 
+import java.util.List;
 import java.util.regex.*;
-import java.util.stream.Stream;
-
 import adventofcode.interfaces.ISolver;
 
 public class Day2Part1 implements ISolver<Integer>{
@@ -18,8 +17,9 @@ public class Day2Part1 implements ISolver<Integer>{
 
 
     @Override
-    public Integer solve(Stream<String> input) {
-        return input.filter(s -> isLinePossible(s))
+    public Integer solve(List<String> input) {
+        return input.stream()
+            .filter(s -> isLinePossible(s))
             .map(this::getGameCount)
             .mapToInt(Integer::parseInt)
             .sum();

@@ -13,6 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -83,28 +85,28 @@ class Day1Test {
     @Test
     void testDay1Part1Example() {
 
-        Stream<String> knownStream = Stream.of("1abc2","pqr3stu8vwx","a1b2c3d4e5f","treb7uchet");
+        List<String> input = new ArrayList<>(Arrays.asList("1abc2","pqr3stu8vwx","a1b2c3d4e5f","treb7uchet"));
 
         final Integer knownAnswer = 142;
         Day1Part1 solution = new Day1Part1();
-        assertEquals(knownAnswer, solution.solve(knownStream));
+        assertEquals(knownAnswer, solution.solve(input));
     }
     
     @Test
     void testDay1Part2Sample() {
 
-        Stream<String> knownStream = Stream.of("two1nine",
+        List<String> input = new ArrayList<>(Arrays.asList("two1nine",
                     "eightwothree",
                     "abcone2threexyz",
                     "xtwone3four",
                     "4nineeightseven2",
                     "zoneight234",
-                    "7pqrstsixteen");
+                    "7pqrstsixteen"));
 
         final Integer knownAnswer = 281;
 
         Day1Part2 solution = new Day1Part2();
-        assertEquals(knownAnswer, solution.solve(knownStream));
+        assertEquals(knownAnswer, solution.solve(input));
 
     }
 
@@ -112,7 +114,7 @@ class Day1Test {
     void testDay1Part1() {
         try {
             List<String> input = InputScraper.getInput("2023", "1");
-            Integer value = new Day1Part1().solve(input.stream());
+            Integer value = new Day1Part1().solve(input);
             System.out.println("Answer for Day 1 part 1 is: " + value);
         } catch (IOException e) {
             e.printStackTrace();
@@ -123,7 +125,7 @@ class Day1Test {
     void testDay1Part2() {
         try {
             List<String> input = InputScraper.getInput("2023", "1");
-            Integer value = new Day1Part2().solve(input.stream());
+            Integer value = new Day1Part2().solve(input);
             System.out.println("Answer for Day 1 part 2 is: " + value);
         } catch (IOException e) {
             e.printStackTrace();

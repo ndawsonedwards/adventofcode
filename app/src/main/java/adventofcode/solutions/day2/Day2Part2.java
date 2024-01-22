@@ -1,7 +1,6 @@
 package adventofcode.solutions.day2;
 
-import java.util.stream.Stream;
-
+import java.util.List;
 import java.util.regex.*;
 import adventofcode.interfaces.ISolver;
 
@@ -9,8 +8,9 @@ public class Day2Part2 implements ISolver<Integer> {
 
 
     @Override
-    public Integer solve(Stream<String> input) {
-        return input.mapToInt(this::getPowerPerGame)
+    public Integer solve(List<String> input) {
+        return input.stream()
+            .mapToInt(this::getPowerPerGame)
             .sum();
     }
     

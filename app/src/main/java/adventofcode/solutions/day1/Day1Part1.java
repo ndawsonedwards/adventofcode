@@ -1,14 +1,14 @@
 package adventofcode.solutions.day1;
 
-import java.util.stream.Stream;
-
+import java.util.List;
 import adventofcode.interfaces.ISolver;
 
 public class Day1Part1 implements ISolver<Integer>{
 
     @Override
-    public Integer solve(Stream<String> input) {
-        return input.map(this::replaceNonInteger)
+    public Integer solve(List<String> input) {
+        return input.stream()
+            .map(this::replaceNonInteger)
             .filter(s -> !s.isEmpty())
             .map(this::getFirstAndLastDigit)
             .mapToInt(Integer::parseInt)
