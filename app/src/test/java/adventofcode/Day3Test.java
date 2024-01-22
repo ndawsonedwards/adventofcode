@@ -14,7 +14,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import adventofcode.scraper.InputScraper;
 import adventofcode.solutions.day3.Day3Part1;
-import adventofcode.solutions.day3.PartNumber;
+import adventofcode.solutions.day3.Day3Part1.PartNumber;
+
 
 public class Day3Test {
     
@@ -38,7 +39,7 @@ public class Day3Test {
     @Test
     public void testFindNumber() {
         String line = "..380.................553..559..105.....749.............*..........*.........*.............-968....@.....*..*....908..603...................";
-        SortedMap<Integer, PartNumber> expected = new TreeMap<>();
+        SortedMap<Integer, Day3Part1.PartNumber> expected = new TreeMap<>();
         expected.put(2, new PartNumber(2, 4, 380));
         expected.put(22, new PartNumber(22, 24, 553));
         expected.put(27, new PartNumber(27, 29, 559));
@@ -55,9 +56,9 @@ public class Day3Test {
         expected.forEach((key, value) -> {
             assertTrue(found.containsKey(key));
             
-            assertEquals(value.endIndex, found.get(key).endIndex);
-            assertEquals(value.startIndex, found.get(key).startIndex);
-            assertEquals(value.value, found.get(key).value);
+            assertEquals(value.endIndex(), found.get(key).endIndex());
+            assertEquals(value.startIndex(), found.get(key).startIndex());
+            assertEquals(value.value(), found.get(key).value());
         });
     }
 
@@ -66,9 +67,9 @@ public class Day3Test {
     public void testNearestNeighbor(){
         Day3Part1 solver = new Day3Part1();
 
-        String[] sample = {"....................................18..........889.270.....748.280...997.................617..............622........763............476....",
-                           "...529......434.....191..489...717...@.....................&....................939*7.....*....................606............760....*......",
-                           "....*...473....*221................$........182......812........493.84....793..........794.......589..407..41...*.....................68...."};
+        String[] sample = {"....................................18..........889.270.....748.280...997.................617..............622........763............476...*",
+                           "6..529......434.....191..489...717...@.....................&....................939*7.....*....................606............760....*......",
+                           "....*...473....*221................$........182......812........493.84....793..........794.......589..407..41...*.....................68...9"};
 
         solver.width = sample[0].length();
 
@@ -80,7 +81,7 @@ public class Day3Test {
         List<PartNumber> result = solver.findNeighbors(solver.getSpecialIndices(), solver.getNumbers());
 
         for (PartNumber i : result) {
-            System.out.println(String.valueOf(i.value));
+            System.out.println(String.valueOf(i.value()));
         }
 
         assertEquals(12, result.size());
@@ -89,22 +90,21 @@ public class Day3Test {
 
     @Test
     void testDay1Sample() {
-        Day3Part1 solver = new Day3Part1();
-        // String[] sample = {"467..114..",
-        //                    "...*......",
-        //                    "..35..633.",
-        //                    "......#...",
-        //                    "617*......",
-        //                    ".....+.58.",
-        //                    "..592.....",
-        //                    "......755.",
-        //                    "...$.*....",
-        //                    ".664.598.."};
-        // List<String> input = Arrays.asList(sample);
-        // final Integer expected = 4361;
+        String[] sample = {"467..114..",
+                           "...*......",
+                           "..35..633.",
+                           "......#...",
+                           "617*......",
+                           ".....+.58.",
+                           "..592.....",
+                           "......755.",
+                           "...$.*....",
+                           ".664.598.."};
+        List<String> input = Arrays.asList(sample);
+        final Integer expected = 4361;
 
-        // Integer value = solver.solve(input);
-        // assertEquals(expected, value);
+        Integer value = new Day3Part1().solve(input);
+        assertEquals(expected, value);
 
         String[] sample2 = {"467..114.*",
                             "...*......",
@@ -116,13 +116,25 @@ public class Day3Test {
                             "^.....755.",
                             "...$.*....",
                             ".664.598.."};
-        List<String>  input = Arrays.asList(sample2);
+        input = Arrays.asList(sample2);
         final Integer expected2 = 3744;
 
+        value = new Day3Part1().solve(input);
+        assertEquals(expected2, value);
 
-        Integer value2 = solver.solve(input);
+        String[] sample3 = {"46........",
+                            "47.*......",
+                            "48........"};
+        input = Arrays.asList(sample3);
+        value = new Day3Part1().solve(input);
+        assertEquals(0, value);
 
-        assertEquals(expected2, value2);
+        String[] sample4 = {"....5.....",
+                            "..*.55....",
+                            "....555..."};
+        input = Arrays.asList(sample4);
+        value = new Day3Part1().solve(input);
+        assertEquals(0, value);
 
 
     }

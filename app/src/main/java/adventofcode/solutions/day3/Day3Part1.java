@@ -3,15 +3,21 @@ package adventofcode.solutions.day3;
 import java.util.regex.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+
 import adventofcode.interfaces.ISolver;
 
 public class Day3Part1 implements ISolver<Integer>{
 
     public final Pattern numberPattern = Pattern.compile("(\\d+)");
+
+    public record PartNumber(int startIndex, int endIndex, int value) {}
+    
 
     public Integer width = 0;
     private Integer lineCount = 0;
@@ -50,26 +56,37 @@ public class Day3Part1 implements ISolver<Integer>{
     }
 
 
-    public List<PartNumber> findNeighbors(List<Integer> target, SortedMap<Integer, PartNumber> numbers) {
-        SortedMap<Integer,PartNumber> potential = new TreeMap<>();        
-        for (Integer i : target) {
+    public List<PartNumber> findNeighbors(List<Integer> specialIndices, SortedMap<Integer, PartNumber> numbers) {
+        SortedMap<Integer,PartNumber> found = new TreeMap<>();         
+        for (Integer i : specialIndices) {
             //Add all start indexes surrounding special char
+            final int leftReach = 3;
+            final int rightReach = 2;
+            int leftIndex = ((i % width) > leftReach) ? (i-leftReach) : (i - (i % width));
+            int rightIndex = ((i % width + rightReach) >= (width - 1)) ? i : (i + rightReach);
+
             System.out.println("---- " + i + " ---- width = " + width);
-            System.out.println((i - width - 3) + " to " + (i - width + 1));
-            System.out.println((i - 3) + " to " + (i + 1));
-            System.out.println((i + width - 3) + " to " + (i + width + 1));
+            System.out.println((leftIndex - width) + " to " + (rightIndex - width));
+            System.out.println((leftIndex) + " to " + (rightIndex));
+            System.out.println((leftIndex + width) + " to " + (rightIndex + width));
 
             // subMap: fromKey (inclusive) -> toKey (exclusive)
-            potential.putAll(numbers.subMap(i - width - 3, i - width + 2));
-            potential.putAll(numbers.subMap(i - 3, i + 2));
-            potential.putAll(numbers.subMap(i + width - 3, i + width + 2));
+            SortedMap<Integer,PartNumber> potential = new TreeMap<>();
+            potential.putAll(numbers.subMap(leftIndex - width, rightIndex - width));
+            potential.putAll(numbers.subMap(leftIndex, rightIndex));
+            potential.putAll(numbers.subMap(leftIndex + width, rightIndex + width));
+
+            Set<Integer> removalSet = new HashSet<>();
+            for (Map.Entry<Integer, PartNumber> entry : potential.entrySet()) {
+                if ((entry.getValue().endIndex % width) < (i % width -1)) {
+                    removalSet.add(entry.getKey());
+                }
+            }
+            potential.keySet().removeAll(removalSet);
+            found.putAll(potential);
         }
 
-        System.out.println("------- potentials ---------");
-        for (Map.Entry<Integer, PartNumber> entry : potential.entrySet()) {
-            System.out.println(String.format("[%d,%d,%d]", entry.getValue().startIndex,entry.getValue().endIndex, entry.getValue().value));
-        }
-        return new ArrayList<PartNumber>(potential.values());
+        return new ArrayList<PartNumber>(found.values());
     }
 
     public void findSpecials(String line, List<Integer> found) {
