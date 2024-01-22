@@ -6,6 +6,7 @@ import adventofcode.scraper.InputScraper;
 import adventofcode.solutions.day1.Day1Part1;
 import adventofcode.solutions.day1.Day1Part2;
 
+
 public class App {
 
     public static void main(String[] args) {

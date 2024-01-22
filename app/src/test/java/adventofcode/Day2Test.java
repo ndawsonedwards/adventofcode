@@ -11,7 +11,6 @@ import java.util.stream.Stream;
 import org.junit.jupiter.api.Test;
 
 import adventofcode.scraper.InputScraper;
-import adventofcode.solutions.day1.Day1Part2;
 import adventofcode.solutions.day2.Day2Part1;
 import adventofcode.solutions.day2.Day2Part2;
 
